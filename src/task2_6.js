@@ -8,12 +8,12 @@ function Task6() {
   
    
     const jarjestaNumerot = () => {
-    let sortedList1 = lista1.sort()
+    let sortedList1 = lista1.sort(function(a, b){return a - b})
     setLista1([...sortedList1])
     }
 
     const jarjestaMerkkiJonot = () => {
-    let sortedList2 = lista2.sort()
+    let sortedList2 = lista2.sort(function(a, b){return a - b})
     setLista2([...sortedList2])
     }
 
