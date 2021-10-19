@@ -42,7 +42,7 @@ function App() {
       <button onClick ={nappula3Painettu}>Tehtävät 2.5</button>
       <button onClick ={nappula4Painettu}>Tehtävät 2.6</button>
       <button onClick ={nappula5Painettu}>Tehtävät 2.7</button>
-      <button onClick ={nappula5Painettu}>Tehtävät 2.8</button>
+      <button onClick ={nappula6Painettu}>Tehtävät 2.8</button>
 
       {sovellus == 0 &&
       <Task2_1_2_3 />
