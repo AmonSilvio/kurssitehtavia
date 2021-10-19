@@ -3,13 +3,21 @@ import React, {useState} from "react";
 
 function Task8() {
 
-  const [list1, setlist1] = useState([{day: "ma", num: 44}, {day: "pe", num: 100}, {day: "ke", num: 21}, {day: "ti", num: 66}, {day: "la", num : 22}])
+  const [list1, setlist1] = useState([{day: "ma", num: 44, order: 1}, {day: "pe", num: 100, order: 5}, {day: "ke", num: 21, order: 3}, {day: "ti", num: 66, order: 2}, {day: "la", num : 22, order: 6}])
   const [list2, setlista2] = useState([])
 
     const organizeValues = () => {
         let kopio = [].concat(list1)
         kopio = kopio.sort(function(a, b){
             return a.num-b.num
+        })
+        setlista2([...kopio])
+    }
+
+    const organizeDays = () => {
+        let kopio = [].concat(list1)
+        kopio = kopio.sort(function(a, b){
+            return a.order-b.order
         })
         setlista2([...kopio])
     }
@@ -40,7 +48,8 @@ function Task8() {
     return (<div>
             Alkuperäinen lista: 
               {list1.map(item=><div>{item.day} {item.num}</div>)}
-              <button onClick = {organizeValues}>Järjestä numerot valuen mukaan:</button><br></br>
+            <button onClick = {organizeValues}>Järjestä valuen mukaan:</button><br></br>
+            <button onClick = {organizeDays}>Järjestä päivien mukaan:</button><br></br>
             <button onClick = {organizePairs}>Luo parillisten lista</button><br></br>
             <button onClick = {organizeE}>Luo e-kirjaimillisten lista</button><br></br>
             {list2.map(item=><div>{item.day} {item.num}</div>)}
