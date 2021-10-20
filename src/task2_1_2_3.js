@@ -41,7 +41,6 @@ function Task2_1_2_3() {
         sum += h
       }
       setamount(a)
-      console.log("En ymmärrä miksi edellinen rivi ei päivitä annettua muuttujaa heti vaan vasta ikään kuin seuraavalla kierroksella. Eli siis muuttujan amount arvo on tällä hetkellä: " + amount + ", vaikka sen pitäisi olla " + (amount + 1))
       return sum
   }
 

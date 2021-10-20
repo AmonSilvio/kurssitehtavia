@@ -31,20 +31,25 @@ function Task5() {
     }
 
 
-    const countNet = (s) => {
-        let t = (s / 100) * tax
+    const countNet = (s, vero) => {
+        let t = (s / 100) * vero
         return s - t
     }
+
+
 
     const changeTax = (v) => {
         let t = changeNan(v)
         setTax(t)
         for (let i = 0; i < year.length; i++) {
             let month = year[i]
-            month.net = countNet(month.gross)
+            month.net = countNet(month.gross, t)
             replaceMonth(i, month)
         }
+    
     }
+
+
 
     
   

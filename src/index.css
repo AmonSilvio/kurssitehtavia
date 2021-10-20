@@ -11,3 +11,75 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.background {
+  height: 500px;
+  width: 380px;
+  background-color: rgba(5, 44, 31, 0.644);
+}
+
+div > div {
+  padding: 10px;
+
+}
+
+.buttonBackground {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  padding-left: 12px;
+
+}
+
+.resultBackground {
+  display: flex;
+  flex-direction: row;
+}
+
+.screen {
+  height: 50px;
+  width: 60%;
+  background-color: rgba(49, 202, 151, 0.644);
+  margin-left: 10px;
+
+
+}
+
+.result {
+  height: 50px;
+  width: 20%;
+  background-color: rgba(49, 202, 151, 0.644);
+  margin-left: 20px;
+
+}
+
+.button {
+  display: inline-block;
+  padding: 15px 25px;
+  font-size: 24px;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  outline: none;
+  color: #fff;
+  background-color:  rgba(49, 202, 151, 0.644);
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 9px #999;
+}
+
+.button:hover {background-color: #3e8e41}
+
+.button:active {
+  background-color:  rgba(49, 202, 151, 0.644);
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
+
+
+
+.nothing {
+  grid-template-columns: repeat(3, 1fr);
+  display: grid;
+  grid-gap: 1px; 
+}
