@@ -8,27 +8,82 @@ function App() {
   const [näyttö, setNäyttö] = useState("")
   const [result, setResult] = useState("")
   const [lastNum, setlastNum] = useState(0)
+  const [lastOperator, setLastOperator] = useState("")
+  const [operatorIncluded, setoperatorIncluded] = useState(false)
 
-  const lisääMerkki = (merkki) => {
-    
-    if (merkki!=="=" && merkki!== "C") {
-      setNäyttö(näyttö+merkki)
-      let parsed = parseInt(merkki) 
-      if (!isNaN(parsed)) {
-        setlastNum(parsed)
-        let operator = näyttö.substr(näyttö.length - 1, 1)            
-        if (operator === "+" || operator === "-" || operator === "×" || operator==="÷") {          
-          let res = (operators[operator](lastNum, parsed))
-          setlastNum(res)
-          setResult(res)
-        }                    
+  const isOperator = (cha) => {
+    if (cha === "+" || cha === "-" || cha === "×" || cha==="÷") {
+      return true
+    } else {
+      return false
+    }
+  }
+
+  const replaceChas = (str) => {
+    for (let i = 0; i < str.length; i++) {
+      if (str[i] === "×") {
+        str = str.substring(0, i) + "*" + str.substring(i + 1)
       }
-    } else if (merkki === "C") {
+      if (str[i] === "÷") {
+        str = str.substring(0, i) + "/" + str.substring(i + 1)
+      }
+    }
+    return str
+  }
+  
+  const lisääMerkki = (cha) => {
+
+    let screen = näyttö
+    if (cha !== "C") {                                  //Jos painetaan mitä tahansa muuta kuin C-nappia:
+     
+        if (isOperator(cha)) {                          //Taskistetaan ensin onko painettu nappi operaattori.
+                                  
+            if (!operatorIncluded) {                    //Jos on ja jos tämä on ensimmäinen kerta kun operaattoria painetaan, 
+              setoperatorIncluded(true)                 //tehdään merkintä että operaattori on nyt mukana laskukaavassa 
+                                                        //eli laskin voi tästä eteenpäin ruveta laskeskelemaan lopputulosta            
+            
+            } else if (isOperator(                      //Tarkistaa oliko edellinenkin merkki operaattori, jos oli, niin vaihtaa
+              screen.substr(screen.length - 1, 1)) ){    //uuden operaattorin edellisen tilalle
+              screen = screen.slice(0, -1)
+            }           
+        } else if (operatorIncluded) {                  //Jos painettu nappi ei ollut operaattori, niin:                         
+            let res = replaceChas(screen)               //muutetaan kerto- ja jakomerkit sellaiseen muotoon että laskin ne ymmärtää                        
+                                                        //(näytöllä ne säiyvät vanhassa muodossaan)
+
+            if (cha !== "=") {                          //jos painettu nappi oli numero niin lisätään se laskukaavaan mukaan
+              res = res + cha                          
+            } else {                                    //vaan jos painettiin yhtäsuuruusmerkkiä niin lisätään laskun lopputulos näytön merkkijonon mukaan
+              cha += (eval (res))
+            }
+            setResult(eval (res))
+        }
+      setNäyttö(screen + cha)            
+    } else {                                             //Jos painettu nappi olikin C, niin sitten vaan nollataan kaikki
       setNäyttö("")
       setResult("")
-    } else if (merkki === "=") {
-      setNäyttö("") 
+      setoperatorIncluded(false)
     }
+    
+    
+      //let parsed = parseInt(näyttö) 
+    
+    
+     
+     // if (!isNaN(parsed)) {
+    //    setlastNum(parsed)          
+    //    if (lastOperator !== "") {          
+    //      let res = (operators[lastOperator](lastNum, parsed))
+    //      setlastNum(res)
+    //      setResult(res)
+    //    }                    
+        
+
+    //    setLastOperator(cha)
+      
+
+  //  } else if (cha === "=") {
+  //    setNäyttö(näyttö + "=" + result) 
+  //  }
   }
 
   const operators = {
