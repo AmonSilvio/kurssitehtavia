@@ -7,8 +7,6 @@ function Laskin_eval() {
   const [kirjaimet, setKirjaimet] = useState(["@", "(", ")", "C", "7", "8", "9", "÷", "4", "5", "6", "×", "1", "2", "3", "-", "0", ".", "=", "+"])
   const [näyttö, setNäyttö] = useState("")
   const [result, setResult] = useState("")
-  const [lastNum, setlastNum] = useState(0)
-  const [lastOperator, setLastOperator] = useState("")
   const [operatorIncluded, setoperatorIncluded] = useState(false)
 
   const isOperator = (cha) => {
@@ -67,33 +65,6 @@ function Laskin_eval() {
       setoperatorIncluded(false)
     }
     
-    
-      //let parsed = parseInt(näyttö) 
-    
-    
-     
-     // if (!isNaN(parsed)) {
-    //    setlastNum(parsed)          
-    //    if (lastOperator !== "") {          
-    //      let res = (operators[lastOperator](lastNum, parsed))
-    //      setlastNum(res)
-    //      setResult(res)
-    //    }                    
-        
-
-    //    setLastOperator(cha)
-      
-
-  //  } else if (cha === "=") {
-  //    setNäyttö(näyttö + "=" + result) 
-  //  }
-  }
-
-  const operators = {
-    "+": function(a, b) { return a + b },
-    "-": function(a, b) { return a - b },
-    "÷": function(a, b) { return a / b },
-    "×": function(a, b) { return a * b },
   }
 
 

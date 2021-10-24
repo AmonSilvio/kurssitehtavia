@@ -66,6 +66,7 @@ div > div {
   border: none;
   border-radius: 15px;
   box-shadow: 0 9px #999;
+  min-width: 60px;
 }
 
 .button:hover {background-color: #3e8e41}
@@ -76,10 +77,3 @@ div > div {
   transform: translateY(4px);
 }
 
-
-
-.nothing {
-  grid-template-columns: repeat(3, 1fr);
-  display: grid;
-  grid-gap: 1px; 
-}

@@ -3,7 +3,7 @@
 import React, {useState} from "react";
 import Nappula from "./Nappula.js"
 
-function Laskin_karvalakkimalli() {
+function Laskin_kotikutoinen() {
   const [kirjaimet, setKirjaimet] = useState(["%", "(", ")", "C", "7", "8", "9", "÷", "4", "5", "6", "×", "1", "2", "3", "-", "0", ".", "=", "+"])
   const [näyttö, setNäyttö] = useState("")
   const [result, setResult] = useState("")
@@ -39,7 +39,7 @@ function Laskin_karvalakkimalli() {
           setresultHistory(resHistoryCopy)      
   }
 
-  const karvalakkiEval = (cha) => {
+  const kotikutoinenEval = (cha) => {
     
     //etsii viimeksi annetun numeron kokonaisuudessaan
     let res = näyttö
@@ -68,7 +68,7 @@ function Laskin_karvalakkimalli() {
     return res
   }
 
-  
+  //Tekee laskutoimitukset, ymmärtäen vanhan liiton kerto- ja jakomerkkejä
   const operators = {
     "+": function(a, b) { return a + b },
     "-": function(a, b) { return a - b },
@@ -82,43 +82,40 @@ function Laskin_karvalakkimalli() {
   const lisääMerkki = (cha) => {
     var res = ""    
     let screen = näyttö
-    if (cha !== "C") {    
+    if (cha !== "C") {                                    //Jos painettiin jotain muuta kuin C-kirjainta
         
-        if (!operatorIncluded) {                    //Jos on ja jos tämä on ensimmäinen kerta kun operaattoria painetaan, 
-                                                                
-            addNumberToResultHistory(parseFloat(screen)) //Laittaa ennen operaattoria olevan luvun tuloslistalle ensimmäiseksi                   
-                                                       //tehdään merkintä että operaattori on nyt mukana laskukaavassa 
-        }                                            //eli laskin voi tästä eteenpäin ruveta laskeskelemaan lopputulosta 
+        if (!operatorIncluded) {                              //Jos operaattoria ei ole vielä painettu                                                               
+            addNumberToResultHistory(parseFloat(screen))          //Laittaa ennen operaattoria olevan luvun tuloslistalle ensimmäiseksi                                                                          
+        }                                            
 
      
-        if (isOperator(cha)) {
-            setoperatorIncluded(true)                           //Tarkistaa oliko annettu merkki operaattori
-            if (näyttö.length === 0) {            //Tarkistaa oliko sitä ennen annettu lukua, jos ei niin antaa errorin
+        if (isOperator(cha)) {                                //Tarkistaa oliko annettu merkki operaattori
+            setoperatorIncluded(true)                            //Merkitsee ylös että operaattori on nyt mukana pelissä
+            if (näyttö.length === 0) {                           //Tarkistaa oliko operaattoria ennen annettu lukua, jos ei niin antaa errorin
                 screen = "Error!"
                 cha = ""
-            } else if (isOperator(                      //Tarkistaa oliko edellinenkin merkki operaattori, jos oli, niin vaihtaa
-              screen.substr(screen.length - 1, 1)) ){    //uuden operaattorin edellisen tilalle
+            } else if (isOperator(                               //Tarkistaa oliko edellinenkin merkki operaattori, jos oli, niin vaihtaa
+              screen.substr(screen.length - 1, 1)) ){            //uuden operaattorin edellisen tilalle
               screen = screen.slice(0, -1)
             } else {
              
-              setLastOperator(cha)
+              setLastOperator(cha)                              //Merkitsee mikä oli viimeisin painettu operaattori
             }
-            if (cha === "%") {                      //Jos operaattori on % niin sitten lasketaankin koko juttuh heti
-                res = karvalakkiEval(cha)                
+            if (cha === "%") {                                  //Jos operaattori on % niin sitten lasketaankin koko juttu heti
+                res = kotikutoinenEval(cha)                
             }
                         
-        } else { 
-          if (operatorIncluded) {               //Jos merkkijonossa oli mukana operaattori niin sitten tehdään laskutoimituksia              
-            res = karvalakkiEval(cha)
+        } else {                                          //Jos painettiin jotain muuta kuin operaattoria, eli painettiin numeroa:
+          if (operatorIncluded) {                             //Jos merkkijonossa oli mukana operaattori niin sitten tehdään laskutoimituksia              
+            res = kotikutoinenEval(cha)
             }
-            if (cha === "=") {                  //Jos tuli painettua yhtäsuuruusmerkkiä niin se laitetaan mukaan näytölle
+            if (cha === "=") {                                //Jos tuli painettua yhtäsuuruusmerkkiä niin se laitetaan mukaan näytölle
                 cha += res
             }
         }
 
-        setResult(res)                          //Asetetaan tulokset tulosnäytölle
-
-        setNäyttö(screen + cha) 
+        setResult(res)                                      //Asetetaan tulokset tulosnäytölle
+        setNäyttö(screen + cha)                             //ja muukin teksti näytölle
         
            
    } else {                                             //Jos painettu nappi olikin C, niin sitten vaan nollataan kaikki
@@ -145,4 +142,4 @@ return (<div class="background">
 }
 
 
-export default Laskin_karvalakkimalli;
+export default Laskin_kotikutoinen;
