@@ -1,79 +1,37 @@
+
+* {
+	box-sizing: border-box;
+}
+
 body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
-}
-
-.background {
-  height: 500px;
-  width: 380px;
-  background-color: rgba(5, 44, 31, 0.644);
-}
-
-div > div {
-  padding: 10px;
-
-}
-
-.buttonBackground {
+  background: linear-gradient(to right, #301916 0%, #301916 5%, #8A6552 5%, #8A6552 10%, #462521 10%, #462521 15%, #301916 15%, #301916 20%, #462521 20%, #462521 25%, #8A6552 25%, #8A6552 30%, #301916 30%, #301916 35%, #8A6552 35%, #8A6552 40%, #462521 40%, #462521 45%, #301916 45%, #301916 50%, #8A6552 50%, #8A6552 55%, #462521 55%, #462521 60%, #301916 60%, #301916 65%, #8A6552 65%, #8A6552 70%, #301916 70%, #301916 75%, #462521 75%, #462521 80%, #301916 80%, #301916 85%, #8A6552 85%, #8A6552 90%, #462521 90%, #462521 95%, #301916 95%, #301916 100%);
   display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  padding-left: 12px;
-
-}
-
-.resultBackground {
-  display: flex;
-  flex-direction: row;
-}
-
-.screen {
-  height: 50px;
-  width: 60%;
-  background-color: rgba(49, 202, 151, 0.644);
-  margin-left: 10px;
-
-
-}
-
-.result {
-  height: 50px;
-  width: 20%;
-  background-color: rgba(49, 202, 151, 0.644);
-  margin-left: 20px;
-
-}
-
-.button {
-  display: inline-block;
-  padding: 15px 25px;
-  font-size: 24px;
-  cursor: pointer;
+	align-items: center;
+	justify-content: center;
+	padding: 50px;  
   text-align: center;
-  text-decoration: none;
-  outline: none;
-  color: #fff;
-  background-color:  rgba(49, 202, 151, 0.644);
-  border: none;
-  border-radius: 15px;
-  box-shadow: 0 9px #999;
-  min-width: 60px;
+  height: 100vh;
 }
 
-.button:hover {background-color: #3e8e41}
 
-.button:active {
-  background-color:  rgba(49, 202, 151, 0.644);
-  box-shadow: 0 5px #666;
-  transform: translateY(4px);
+
+.box {
+  background:  rgb(255, 236, 195);
+  color: rgb(109, 86, 25);
+	padding: 60px;
+	max-width: 650px;
+	background: lighten(rgb(179, 147, 60), 20%);
+	border: 5px dashed rgb(179, 147, 60);
+
+	font-family: Marcellus, serif;
+	font-size: 3em;
+	text-shadow: 0 2px #fff;
+	text-align: center;
 }
 
+.timer {
+  font-family: Marcellus, serif;
+	font-size: 0.5em;
+	text-shadow: 0 2px #fff;
+	text-align: center;
+}
