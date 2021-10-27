@@ -1,37 +1,62 @@
-
-* {
-	box-sizing: border-box;
-}
-
 body {
-  background: linear-gradient(to right, #301916 0%, #301916 5%, #8A6552 5%, #8A6552 10%, #462521 10%, #462521 15%, #301916 15%, #301916 20%, #462521 20%, #462521 25%, #8A6552 25%, #8A6552 30%, #301916 30%, #301916 35%, #8A6552 35%, #8A6552 40%, #462521 40%, #462521 45%, #301916 45%, #301916 50%, #8A6552 50%, #8A6552 55%, #462521 55%, #462521 60%, #301916 60%, #301916 65%, #8A6552 65%, #8A6552 70%, #301916 70%, #301916 75%, #462521 75%, #462521 80%, #301916 80%, #301916 85%, #8A6552 85%, #8A6552 90%, #462521 90%, #462521 95%, #301916 95%, #301916 100%);
-  display: flex;
-	align-items: center;
-	justify-content: center;
-	padding: 50px;  
-  text-align: center;
-  height: 100vh;
+
+  background: #0f2027; /* fallback for old browsers */
+  background: linear-gradient(to right,#2c5364, #203a43, #0f2027);
+
+  color: rgb(0, 0, 0);
+}
+
+h1 { font-family: times, Times New Roman, times-roman, georgia, serif;
+	font-size: 28px;
+		line-height: 40px;
+		letter-spacing: 4px;
+	margin: 0 0 0 0;
+	padding: 0 0 0 0;
+			font-weight: 100; }
+
+.container {
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	color: rgb(0, 0, 0);
+	border-radius: 1px;
+position: relative;
+width: 80%;
+margin-top: 5%;
+margin-right: 12%;
+background: linear-gradient(to right,#2c5364, #203a43, #0f2027);
+display: flex;
 }
 
 
-
-.box {
-  background:  rgb(255, 236, 195);
-  color: rgb(109, 86, 25);
-	padding: 60px;
-	max-width: 650px;
-	background: lighten(rgb(179, 147, 60), 20%);
-	border: 5px dashed rgb(179, 147, 60);
-
-	font-family: Marcellus, serif;
-	font-size: 3em;
-	text-shadow: 0 2px #fff;
-	text-align: center;
+.container .box.shadow {
+	color: rgb(0, 0, 0);
+  box-shadow: 40px 40px 40px rgba(0,0,0,0.12), 40px 40px 40px rgba(0,0,0,0.24);
 }
 
-.timer {
-  font-family: Marcellus, serif;
-	font-size: 0.5em;
-	text-shadow: 0 2px #fff;
-	text-align: center;
+.textbox {
+	justify-content:  left;
+align-items: left;
+color: rgb(255, 247, 177);	
+font-family: times, Times New Roman, times-roman, georgia, serif;
+		font-size: 20px;
+		line-height: 40px;
+		letter-spacing: 2px;
+	margin-left: 5%;
+	margin-right: 5%;
+	margin-top: 2%;
+	margin-bottom: 2%
+
 }
+
+.answerline {
+	display: flex;
+	flex-direction: row;
+	
+}
+
+.answerline {
+	display: inline-block;
+	
+}
+
