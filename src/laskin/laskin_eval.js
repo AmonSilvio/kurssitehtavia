@@ -1,7 +1,7 @@
 //import './App.css';
 
 import React, {useState} from "react";
-import Nappula from "./Nappula.js"
+import Nappula from "../Nappula.js"
 
 function Laskin_eval() {
   const [kirjaimet, setKirjaimet] = useState(["@", "(", ")", "C", "7", "8", "9", "÷", "4", "5", "6", "×", "1", "2", "3", "-", "0", ".", "=", "+"])

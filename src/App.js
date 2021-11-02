@@ -1,40 +1,82 @@
-import logo from './logo.svg';
-import './App.css';
-import React, { useState, useEffect } from 'react';
-import { styled } from '@mui/material/styles';
-import Container from '@mui/material/Container';
-import Komponentti from './Komponentti'
 
-let arr1 = [{vastaus: "ei", booleanArvoVastaukselle: false, komponentinId: 1},{vastaus: "kyllä", booleanArvoVastaukselle: false, komponentinId: 2},{vastaus: "ehkä", booleanArvoVastaukselle: false, komponentinId: 3}]
-let arr2 = [{vastaus: "ei", booleanArvoVastaukselle: false, komponentinId: 4},{vastaus: "kyllä", booleanArvoVastaukselle: false, komponentinId: 5},{vastaus: "ehkä", booleanArvoVastaukselle: false, komponentinId: 6}, {vastaus: "en osaa sanoa", booleanArvoVastaukselle: false, komponentinId: 7}]
-let arr3 = [{vastaus: "no jaa", booleanArvoVastaukselle: false, komponentinId: 8},{vastaus: "kysytkin vielä!", booleanArvoVastaukselle: false, komponentinId: 9},{vastaus: "kyllä ne tästä...", booleanArvoVastaukselle: false, komponentinId: 10}]
-let arr4 = [{vastaus: "johan nyt toki", booleanArvoVastaukselle: false, komponentinId: 11},{vastaus: "mitä?!", booleanArvoVastaukselle: false, komponentinId: 12},{vastaus: "AAAArrrrggh!!!!", booleanArvoVastaukselle: false, komponentinId: 13}]
 
-let listaPääkysymyksiä1 = [{pääkysymys: "Onko JavaScript kivaa?", id: 1, vastausVaihtoehdot:arr1}]
-let listaPääkysymyksiä2 = [{pääkysymys: "Onko React kivaa?", id: 1, vastausVaihtoehdot:arr2}]
-let listaPääkysymyksiä3 = [{pääkysymys: "Onko Reactin hookit vaikeita?", id: 1, vastausVaihtoehdot:arr3}]
-let listaPääkysymyksiä4 = [{pääkysymys: "Joko alkaa päässä sirittää?", id: 1, vastausVaihtoehdot:arr4}]
-
-let kaikki = [listaPääkysymyksiä1,listaPääkysymyksiä2,listaPääkysymyksiä3, listaPääkysymyksiä4]
+import React, {useState} from "react";
+import Lists from './listahässäkkä/Lists';
+import Arrows from "./listahässäkkä/Arrows";
+import CreateLists from "./listahässäkkä/nameObjects"
 
 function App() {
-  const [pääkysymykset, setPääkysymykset] = useState(kaikki)
-  const [tämänHetkinen, setTämänhetkinen] = useState([])
-  console.log(kaikki)
-  return (    
-    <Container> 
-      {kaikki.map((setti) => (
-        <> 
-        {console.log("setti",setti)}
-        <Komponentti pääkysymys={setti}/>
-        </>
-      ))}
+  const [list1, setList1] = useState(CreateLists("Disney"))
+  const [list2, setList2] = useState(CreateLists("Horror"))
+  const [selectedID, setSelectedID] = useState()
+  console.log("name id " + selectedID + " is selected")
+
+  const setSelected = (obj) => {
+    obj.selected = !obj.selected
+    changeCorrectList(obj)
+  }
+
+  const changeCorrectList = (obj) =>{
+    let targetList = []
+    if (obj.listID === 1) {
+      targetList = [].concat(list1)      
+    } else {
+      targetList = [].concat(list2)  
+    }    
+    targetList.splice(findIndex(obj, targetList), 1, obj)
+    if (obj.listID === 1) {
+      setLists(targetList, list2)      
+    } else {
+      setLists(list1, targetList)    
+    }    
+  }
+
+  const findIndex = (obj, list) => {
+    return list.indexOf(obj)
+  }
+
+  const setLists = (lista1 = list1, lista2 = list2) => {
+    setList1(lista1)
+    setList2(lista2)
+  }
+  
+
+  const moveItemBetweenLists = (fromLeftToRight) => {
+                              
+      let srcList = []
+      let targetList = []
+    
+      if (fromLeftToRight) {        //tekee listoista kopion sen mukaan onko lista lähettävä vai vastaanottava
+        srcList = [].concat(list1)
+        targetList = [].concat(list2)
+      } else {
+        srcList = [].concat(list2)
+        targetList = [].concat(list1)    
+      }
+      let listCopy = [].concat(srcList)  //tekee vielä toisen kopion lähdelistasta. Tämä siksi että alla oleva metodi mahdollistaa useamman vaihtoehdon siirtämisen kerralla
+      for (let n of listCopy) {
+        if (n.selected) {
+          n.selected = !n.selected
+          targetList.push(n)
+          srcList.splice(findIndex(n, srcList), 1)
+        }
+      }
+      //listCopy.map(n => n.selected ? (n.selected = !n.selected, targetList.push(n), srcList.splice(findIndex(n, srcList), 1)) : console.log("nope"))
+          
+        if (fromLeftToRight) { //asettaa kopiot tiloihin
+          setLists(srcList, targetList)
+        } else {      
+          setLists(targetList, srcList)
+        }
+  }
 
 
-    </Container>
-  );
+    return (
+    <div class="lists">
+        <Lists list={list1} setSelected={setSelected}></Lists>
+        <Arrows moveItemBetweenLists ={moveItemBetweenLists}></Arrows>
+        <Lists list={list2} setSelected={setSelected}></Lists>
+    </div>
+    )  
 }
-
-
 export default App;
-
