@@ -3,26 +3,7 @@ import React, { useState, useEffect } from 'react';
 import Container from '@mui/material/Container';
 import Kysymykset  from './Kysymykset'
 import giveNewID from './newID';
-
-const giveRandomAnswerOption = (options) => {
-  let optionString = ["Kyllä", "Joo", "Ei", "Ehkä", "Mitä se sulle kuuluu?", "No jaa", "En kyllä osaa sanoa", "Jaa-a kuule", "No tuota niin niin...", "Kysy joltain muulta", "Että mitä?", "Nyt äijä kuule...", "Jätä mut rauhaan!", "Upeaa!!!"]
-  let nameFound = false
-  let w = optionString[0]  
-    while (nameFound === false) {
-      let foundSameOption = 0
-      let i = giveRandomNumber(0, optionString.length - 1)
-      w = optionString[i]  
-      for (let o of options) {
-        if (o === w) {
-          foundSameOption++
-       }
-      }
-      if (foundSameOption === 0) {
-        nameFound = true  
-      }
-    }      
-  return w
-}
+import giveRandomAnswerOption from './giveRandomAnswerOption';
 
 
 const createOptions = () => {
@@ -34,7 +15,6 @@ const createOptions = () => {
       let o = giveRandomAnswerOption(optionList)
       optionList.push(o)
       options[id] = {option: o, checkboxState: false}
-     // options = Object.assign({ [id]: {option: giveRandomAnswerOption(), checkboxState: false}}, options)
     }
     return options
 }
@@ -44,14 +24,12 @@ const giveRandomNumber = (min=0, max) => {
 }
 
 
-let questions = {[giveNewID(10, 100)] : {question: "Onko JavaScript kivaa?", correctAnswer: 0, options: createOptions()},
-                  [giveNewID(200, 1000)] : {question:  "Onko React kivaa?", correctAnswer: 0, options: createOptions()},
-                  [giveNewID(300, 3000)] : {question: "Onko Reactin hookit vaikeita", correctAnswer: 0, options: createOptions()},
-                  [giveNewID(400, 4000)] : {question: "Sirittääkö päässäsi?", correctAnswer: 0, options: createOptions()}}
+let questions = {[giveNewID(10)] : {question: "Onko JavaScript kivaa?", correctAnswer: 0, options: createOptions()},
+                  [giveNewID(200)] : {question:  "Onko React kivaa?", correctAnswer: 0, options: createOptions()},
+                  [giveNewID(300)] : {question: "Onko Reactin hookit vaikeita", correctAnswer: 0, options: createOptions()},
+                  [giveNewID(400)] : {question: "Sirittääkö päässäsi?", correctAnswer: 0, options: createOptions()}}
 
-             
-console.log(questions)
-
+                  
 function Tenttidemo() {
 
   const [mainState, setMainState] = useState(() => {
@@ -80,7 +58,7 @@ function Tenttidemo() {
     let m = JSON.parse(JSON.stringify(mainState))
     let previousID = findTheLastUsedID(m)
     let newQID = giveNewID(previousID)
-    m = Object.assign({ [newQID]: {question: "Onko tämä uusi kysymys?", correctAnswer: 0, options: createOptions()}}, m)
+    m[newQID]= {question: "Onko tämä uusi kysymys?", correctAnswer: 0, options: createOptions()}
     console.log(m)
     setMainState(m)
   }
@@ -94,15 +72,13 @@ function Tenttidemo() {
   const copy = (src) => {
     return JSON.parse(JSON.stringify(src))
   }
-
  
 
 const addOption = (questionID) => {
   let m = copy(mainState)
   let previousID = findTheLastUsedID(m[questionID].options)
   let id = giveNewID(previousID)
-  //m[p.questionID].options[id] = {option: "uusi vaihtoehto", checkboxState: false}  
-  m[questionID].options = Object.assign({ [id]: {option: "uusi vaihtoehto", checkboxState: false}}, m[questionID].options)
+  m[questionID].options[id] = {option: giveRandomAnswerOption(), checkboxState: false}  
   console.log(m[questionID].options) 
   setMainState(m)
 }

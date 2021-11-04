@@ -23,7 +23,7 @@ const Vastausvaihtoehdot = (p)  => {
         <> 
         <div class="answerlines">
           <div class="answerline">
-            <input type="checkbox" checked id={id} onClick={() => p.checkBoxStateSave(p.questionID, id)}/> {option.option}
+            <input type="checkbox" checked  onClick={() => p.checkBoxStateSave(p.questionID, id)}/> {option.option}
             <div class="deleteIcon"><DeleteIcon onClick={() => p.removeOption(p.questionID, id)}></DeleteIcon></div>
           </div>
         </div> 
