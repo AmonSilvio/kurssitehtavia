@@ -1,10 +1,11 @@
+
+
+
 body {
 
-    background: #0f2027;
-    background: linear-gradient(to right,#2c5364, #203a43, #0f2027);
-  
-    color: rgb(0, 0, 0);
-  }
+    background: #020202;
+ 
+  }  
   
   h1 { font-family: times, Times New Roman, times-roman, georgia, serif;
       font-size: 28px;
@@ -13,6 +14,19 @@ body {
       margin: 0 0 0 0;
       padding: 0 0 0 0;
               font-weight: 100; }
+
+.Appbuttons{
+  display: flex;
+  flex-direction: column;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+
+}
   
   .container {
       position: relative;
@@ -103,5 +117,111 @@ body {
   .buttons {
     display: flex;
     flex-direction: row;
-    justify-content:  right;
+    justify-content:  left;
   }
+
+  .body1 {
+  
+    background: #0f2027;
+    background: linear-gradient(to right,#2c5364, #203a43, #0f2027);
+    margin-top: -3%;
+  
+    color: rgb(0, 0, 0);
+  }
+  
+
+  .body2 {
+
+    background: #270f17;
+    background: linear-gradient(to right,#000000, #9c94e5, #9c94e5, #5661b1, #000000);
+    margin-top: -5%;
+    color: rgb(0, 0, 0);
+  }
+
+  
+.lists {
+	display: flex;
+	justify-content: center;
+	flex-direction: row;
+	margin-top: 5%;
+	margin-left: 12%;
+	margin-right: 12%;
+	align-items: center;
+}
+
+.listBackground {
+	background: rgba(49, 10, 100, 0.185);
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	color: rgb(0, 0, 0);
+	position: relative;
+	width: 30%;
+	min-height: 590px;
+	
+
+}
+
+
+
+.textboxLists {
+	color: rgba(255, 255, 255, 0.8);
+	justify-content:  center;
+	align-items: center;
+	text-align: center;	
+	font-family: "FreeMono, monospace";
+		font-size: 20px;
+		line-height: 40px;
+		letter-spacing: 2px;
+	margin-left: 5%;
+	margin-right: 5%;
+	margin-top: 2%;
+	margin-bottom: 2%
+
+}
+
+.arrows {
+	margin-left: 2%;
+	margin-right: 2%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+* {
+	padding: 0;
+	margin: 0;
+	box-sizing: border-box;
+  }
+
+
+  .arrowbutton{
+    text-decoration: none;
+    color: rgba(255, 255, 255, 0.8);
+    background:rgba(49, 10, 100, 0.459);
+    padding: 15px 40px;
+    border:none;
+    border-radius: 16px;
+    font-weight: normal;
+    text-transform: uppercase;
+    transition: all 0.2s ease-in-out;
+    }
+    
+    .arrowbutton:hover {
+    color: rgba(255, 255, 255, 1);
+    box-shadow: 0 5px 25px rgba(255, 255, 255, 0.925);
+    }
+
+    .selection:hover {
+      color: rgba(255, 255, 255, 1);
+      text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #f574fa, 0 0 40px #fd6bf6, 0 0 50px #ee67fa, 0 0 60px #fc7fbd, 0 0 70px #e600db;
+    
+      }
+    
+      .selected {
+      font-weight: bold;
+      color:rgba(49, 10, 100, 0.459);
+      background:rgba(255, 255, 255, 0.8);
+      box-shadow: 0 5px 25px rgba(255, 255, 255, 0.925);
+      }
+    

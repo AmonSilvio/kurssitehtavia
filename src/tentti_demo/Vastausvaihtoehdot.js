@@ -44,6 +44,7 @@ const removeOption = (id) => {
   let m = copy(p.mainState)
   delete m[p.questionID].options[id]
   console.log(m[p.questionID].options)
+  console.log(m)
   p.setMainState(m)
 }
 
@@ -70,7 +71,6 @@ const removeOption = (id) => {
         </div> 
       </>
         })}<AddIcon  onClick={() => addOption()}></AddIcon ></div>
-        
    
 
   );

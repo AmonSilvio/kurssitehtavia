@@ -11,11 +11,14 @@ const Kysymykset = (p)  => {
   const removeQuestion = (id) => { 
     let m = JSON.parse(JSON.stringify(p.mainState))
     delete m[id]
+    console.log(m)
     p.setMainState(m)  
   }
+  console.log("Kysymykset: " + p.mainState)
+  
 
   return (<div>
-    {Object.entries(p.questions).map(([id, question]) => (
+    {Object.entries(p.questions).map(([id, question]) => ( console.log(question), 
     <Box class="container">
       <div class="box shadow">       
             <Grid class="textbox"> 

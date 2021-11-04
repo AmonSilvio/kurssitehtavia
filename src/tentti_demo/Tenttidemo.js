@@ -50,7 +50,7 @@ let questions = {[giveNewID(10, 100)] : {question: "Onko JavaScript kivaa?", cor
                   [giveNewID(400, 4000)] : {question: "Sirittääkö päässäsi?", correctAnswer: 0, options: createOptions()}}
 
              
-
+console.log(questions)
 
 function Tenttidemo() {
 
@@ -68,12 +68,13 @@ function Tenttidemo() {
   });
 
   console.log("render")
+  console.log("main: "+ mainState)
   
-  useEffect(() => {    
+  /*useEffect(() => {    
   let avain = "localStorageAvain"
   localStorage.setItem(avain, JSON.stringify(mainState))
   console.log("useEffect")
-  },[mainState]); //makes the effect run if changed
+  },[mainState]); //makes the effect run if changed*/
 
 
   const addQuestion = () => {
@@ -91,16 +92,17 @@ function Tenttidemo() {
     return l[l.length - 1]
   }
 
-  return (    
-    <Container>   
+  return (<body class="body1">   <br></br>
+  <br></br>
+    
+    <Container >   
         <> 
-        <Kysymykset questions={questions} setMainState={setMainState} giveNewID={giveNewID} mainState={mainState} findTheLastUsedID={findTheLastUsedID} />
+        <Kysymykset questions={mainState} setMainState={setMainState} giveNewID={giveNewID} mainState={mainState} findTheLastUsedID={findTheLastUsedID} />
         </>      
-      <br></br>
-      <br></br>
-             <button onClick={() => addQuestion()}>Lisää kysymys</button>     
+   
+             <button onClick={() => addQuestion()}>Lisää kysymys</button>
     </Container>
-  );
+    </body>);
 }
 
 

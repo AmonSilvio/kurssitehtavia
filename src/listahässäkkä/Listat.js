@@ -1,11 +1,12 @@
 
 
 import React, {useState} from "react";
-import Lists from './listahässäkkä/Lists';
-import Arrows from "./listahässäkkä/Arrows";
-import CreateLists from "./listahässäkkä/nameObjects"
+import Lists from './Lists';
+import Arrows from "./Arrows";
+import CreateLists from "./nameObjects"
 
-function App() {
+
+function Listat() {
   const [list1, setList1] = useState(CreateLists("Disney"))
   const [list2, setList2] = useState(CreateLists("Horror"))
   const [selectedID, setSelectedID] = useState()
@@ -71,12 +72,31 @@ function App() {
   }
 
 
-    return (
+    return (<body class="body2">
+      <br></br>
+  <br></br>
     <div class="lists">
         <Lists list={list1} setSelected={setSelected}></Lists>
         <Arrows moveItemBetweenLists ={moveItemBetweenLists}></Arrows>
         <Lists list={list2} setSelected={setSelected}></Lists>
     </div>
+    <br></br>
+  <br></br>
+  <br></br>
+  <br></br>
+  <br></br>
+  <br></br>
+  <br></br>
+  <br></br>
+  <br></br>
+  <br></br>
+  <br></br>
+  <br></br>
+  <br></br>
+  <br></br>
+  <br></br>
+  <br></br>
+    </body>
     )  
 }
-export default App;
+export default Listat;
