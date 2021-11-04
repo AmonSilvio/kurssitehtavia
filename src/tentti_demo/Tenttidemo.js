@@ -63,18 +63,17 @@ function Tenttidemo() {
     if (data === null) {
       bool = true
     }
-    //return bool ? questions : data
-    return questions
+    return bool ? questions : data
   });
 
   console.log("render")
   console.log("main: "+ mainState)
   
-  /*useEffect(() => {    
+  useEffect(() => {    
   let avain = "localStorageAvain"
   localStorage.setItem(avain, JSON.stringify(mainState))
   console.log("useEffect")
-  },[mainState]); //makes the effect run if changed*/
+  },[mainState]); //makes the effect run if changed
 
 
   const addQuestion = () => {
@@ -92,14 +91,50 @@ function Tenttidemo() {
     return l[l.length - 1]
   }
 
+  const copy = (src) => {
+    return JSON.parse(JSON.stringify(src))
+  }
+
+ 
+
+const addOption = (questionID) => {
+  let m = copy(mainState)
+  let previousID = findTheLastUsedID(m[questionID].options)
+  let id = giveNewID(previousID)
+  //m[p.questionID].options[id] = {option: "uusi vaihtoehto", checkboxState: false}  
+  m[questionID].options = Object.assign({ [id]: {option: "uusi vaihtoehto", checkboxState: false}}, m[questionID].options)
+  console.log(m[questionID].options) 
+  setMainState(m)
+}
+
+const removeOption = (questionID, id) => {
+  let m = copy(mainState)
+  delete m[questionID].options[id]
+  console.log(m[questionID].options)
+  console.log(m)
+  setMainState(m)
+}
+
+const checkBoxStateSave = (questionID, id) => {
+  let m = copy(mainState)
+  m[questionID].options[id].checkboxState = !m[questionID].options[id].checkboxState
+  setMainState(m)
+}
+
+const removeQuestion = (questionID) => { 
+  let m = JSON.parse(JSON.stringify(mainState))
+  delete m[questionID]
+  console.log(m)
+  setMainState(m)  
+}
+
+
   return (<body class="body1">   <br></br>
-  <br></br>
-    
+  <br></br>    
     <Container >   
         <> 
-        <Kysymykset questions={mainState} setMainState={setMainState} giveNewID={giveNewID} mainState={mainState} findTheLastUsedID={findTheLastUsedID} />
-        </>      
-   
+        <Kysymykset setMainState={setMainState} addOption={addOption} removeQuestion={removeQuestion} checkBoxStateSave={checkBoxStateSave} removeOption={removeOption} giveNewID={giveNewID} mainState={mainState} findTheLastUsedID={findTheLastUsedID} />
+        </>         
              <button onClick={() => addQuestion()}>Lisää kysymys</button>
     </Container>
     </body>);
