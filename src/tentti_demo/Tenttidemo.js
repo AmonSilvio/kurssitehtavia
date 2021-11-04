@@ -28,8 +28,9 @@ const giveRandomAnswerOption = (options) => {
 const createOptions = () => {
   let options = {}
   let optionList = []
+  let id = 10
     for (let i = 0; i < giveRandomNumber(3, 6); i++) {
-      let id = giveNewID()
+      id = giveNewID(id)
       let o = giveRandomAnswerOption(optionList)
       optionList.push(o)
       options[id] = {option: o, checkboxState: false}
@@ -43,10 +44,10 @@ const giveRandomNumber = (min=0, max) => {
 }
 
 
-let questions = {[giveRandomNumber(0, 10000000)] : {question: "Onko JavaScript kivaa?", correctAnswer: 0, options: createOptions()},
-                  [giveRandomNumber(0, 10000000)] : {question:  "Onko React kivaa?", correctAnswer: 0, options: createOptions()},
-                  [giveRandomNumber(0, 10000000)] : {question: "Onko Reactin hookit vaikeita", correctAnswer: 0, options: createOptions()},
-                  [giveRandomNumber(0, 10000000)] : {question: "Sirittääkö päässäsi?", correctAnswer: 0, options: createOptions()}}
+let questions = {[giveNewID(10, 100)] : {question: "Onko JavaScript kivaa?", correctAnswer: 0, options: createOptions()},
+                  [giveNewID(200, 1000)] : {question:  "Onko React kivaa?", correctAnswer: 0, options: createOptions()},
+                  [giveNewID(300, 3000)] : {question: "Onko Reactin hookit vaikeita", correctAnswer: 0, options: createOptions()},
+                  [giveNewID(400, 4000)] : {question: "Sirittääkö päässäsi?", correctAnswer: 0, options: createOptions()}}
 
              
 
@@ -76,18 +77,24 @@ function Tenttidemo() {
 
 
   const addQuestion = () => {
-    let newQID = giveRandomNumber(0, 10000000)
     let m = JSON.parse(JSON.stringify(mainState))
+    let previousID = findTheLastUsedID(m)
+    let newQID = giveNewID(previousID)
     m = Object.assign({ [newQID]: {question: "Onko tämä uusi kysymys?", correctAnswer: 0, options: createOptions()}}, m)
-    console.log(m[newQID])
+    console.log(m)
     setMainState(m)
   }
 
 
+  const findTheLastUsedID = (options) => {
+    let l = Object.keys(options)
+    return l[l.length - 1]
+  }
+
   return (    
     <Container>   
         <> 
-        <Kysymykset questions={questions} setMainState={setMainState} giveNewID={giveNewID} mainState={mainState}/>
+        <Kysymykset questions={questions} setMainState={setMainState} giveNewID={giveNewID} mainState={mainState} findTheLastUsedID={findTheLastUsedID} />
         </>      
       <br></br>
       <br></br>

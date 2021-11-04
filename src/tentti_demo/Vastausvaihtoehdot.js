@@ -28,12 +28,12 @@ const Vastausvaihtoehdot = (p)  => {
     return JSON.parse(JSON.stringify(src))
   }
 
-
+ 
 
 const addOption = () => {
-  let id = giveNewID()
   let m = copy(p.mainState)
-  console.log(m[p.questionID].options[id])
+  let previousID = p.findTheLastUsedID(m[p.questionID].options)
+  let id = giveNewID(previousID)
   //m[p.questionID].options[id] = {option: "uusi vaihtoehto", checkboxState: false}  
   m[p.questionID].options = Object.assign({ [id]: {option: "uusi vaihtoehto", checkboxState: false}}, m[p.questionID].options)
   console.log(m[p.questionID].options) 
@@ -43,6 +43,7 @@ const addOption = () => {
 const removeOption = (id) => {
   let m = copy(p.mainState)
   delete m[p.questionID].options[id]
+  console.log(m[p.questionID].options)
   p.setMainState(m)
 }
 
