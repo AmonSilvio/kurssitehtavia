@@ -7,14 +7,15 @@ import giveRandomAnswerOption from './giveRandomAnswerOption';
 
 
 const createOptions = () => {
-  let options = []
+  let options = {}
   let optionList = []
+  let id = 10
     for (let i = 0; i < giveRandomNumber(3, 6); i++) {
+      id = giveNewID(id)
       let o = giveRandomAnswerOption(optionList)
       optionList.push(o)
-      options.push({id: giveNewID(), option: o, checkboxState: false})
+      options[id] = {option: o, checkboxState: false}
     }
-    options.map(op => console.log(op))
     return options
 }
 
@@ -23,10 +24,10 @@ const giveRandomNumber = (min=0, max) => {
 }
 
 
-let questions = [{id: giveNewID(), question: "Onko JavaScript kivaa?", correctAnswer: 0, options: createOptions()},
-                {id: giveNewID(), question:  "Onko React kivaa?", correctAnswer: 0, options: createOptions()},
-                {id: giveNewID(), question: "Onko Reactin hookit vaikeita", correctAnswer: 0, options: createOptions()},
-                {id: giveNewID(), question: "Sirittääkö päässäsi?", correctAnswer: 0, options: createOptions()}]                  
+let questions = {[giveNewID(10)] : {question: "Onko JavaScript kivaa?", correctAnswer: 0, options: createOptions()},
+                  [giveNewID(200)] : {question:  "Onko React kivaa?", correctAnswer: 0, options: createOptions()},
+                  [giveNewID(300)] : {question: "Onko Reactin hookit vaikeita", correctAnswer: 0, options: createOptions()},
+                  [giveNewID(400)] : {question: "Sirittääkö päässäsi?", correctAnswer: 0, options: createOptions()}}
 
                   
 function Tenttidemo() {
@@ -52,40 +53,34 @@ function Tenttidemo() {
   },[mainState]); //makes the effect run if changed
 
 
-  const remove= (list, id) => {    
-    list = list.filter(t => t.id !== id)
-    list.map(q => q.options = q.options.filter(t => t.id !== id))
-    return list
-  }
-  
   const update = (o)=> {
     let m = JSON.parse(JSON.stringify(mainState))
 
     switch (o.type) {
-      case "REMOVE":    
-        m = remove(m, o.data.id)
+      case "REMOVE_STUDENT":
+        delete m[o.data.questionID].options[o.data.optionID]
         break;
-      case "ADD_OPTION":
-        let newOption = {id: giveNewID(), option: giveRandomAnswerOption(), checkboxState: false}
-        m.find(q => q.id === o.data.id).options.push(newOption)
+      case "ADD_STUDENT":
+        let previousID = findTheLastUsedID(m[o.data.questionID].options)
+        let id = giveNewID(previousID)
+        m[o.data.questionID].options[id] = {option: giveRandomAnswerOption(), checkboxState: false}  
+        break;
+      case "REMOVE_QUESTION":
+        delete m[o.data.questionID]
         break;
       case "ADD_QUESTION":
-        let newQ = {id: giveNewID(), question: "Onko tämä uusi kysymys?", correctAnswer: 0, options: createOptions()}
-        m.push(newQ)
+      //  previousID = findTheLastUsedID(m)
+        let newQID = giveNewID(6666)
+        m[newQID]= {question: "Onko tämä uusi kysymys?", correctAnswer: 0, options: createOptions()}
         break;
       case "SAVE_CHECKBOX_STATE":
-        for (let question of m) {
-          for (let op of question.options) {
-            if (op.id === o.data.id) {
-              op.checkboxState = !op.checkboxState
-            }
-          }
-        }    
+        m[o.data.questionID].options[o.data.optionID].checkboxState = !m[o.data.questionID].options[o.data.optionID].checkboxState
         break;
 
       default: throw "Error"
     }
     setMainState(m)
+
   }
 
 

@@ -10,13 +10,13 @@ const Kysymykset = (p)  => {
   
 
   return (<div>
-    {p.mainState.map(question => (
+    {Object.entries(p.mainState).map(([id, question]) => ( console.log(question), 
     <Box class="container">
       <div class="box shadow">       
             <Grid class="textbox"> 
              <div class="titleLine">
-              <h1>{question.question}</h1><DeleteIcon onClick={() => p.update({type: "REMOVE", data: {id: question.id}})}></DeleteIcon></div>
-              <Vastausvaihtoehdot update={p.update} questionID={question.id} options={question.options}/>                        
+              <h1>{question.question}</h1><DeleteIcon onClick={() => p.update({type: "REMOVE_QUESTION", data: {questionID: id}})}></DeleteIcon></div>
+              <Vastausvaihtoehdot update={p.update} questionID={id} options={question.options}/>                        
             </Grid>
                                      
        </div>

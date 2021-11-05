@@ -7,15 +7,16 @@ import AddIcon from '@mui/icons-material/Add';
 
 const Vastausvaihtoehdot = (p)  => {
 
+
     return (
       <div>
-        {Object.entries(p.options).map(([id, option]) => {
+        {p.options.map(option => {
           return option.checkboxState === false ? (
           <> 
             <div class="answerlines">
               <div class="answerline">
-                <input type="checkbox" id={id} onClick={() => p.update({type: "SAVE_CHECKBOX_STATE", data: {questionID: p.questionID, optionID: id}})}/> {option.option}
-                <div class="deleteIcon"><DeleteIcon onClick={() => p.update({type: "REMOVE_STUDENT", data: {questionID: p.questionID, optionID: id}})}></DeleteIcon></div>
+                <input type="checkbox" onClick={() => p.update({type: "SAVE_CHECKBOX_STATE", data: {id: option.id}})}/> {option.option}
+                <div class="deleteIcon"><DeleteIcon onClick={() => p.update({type: "REMOVE", data: {id: option.id}})}></DeleteIcon></div>
               </div>
             </div> 
         </>) 
@@ -23,12 +24,12 @@ const Vastausvaihtoehdot = (p)  => {
         <> 
         <div class="answerlines">
           <div class="answerline">
-            <input type="checkbox" checked  onClick={() => p.update({type: "SAVE_CHECKBOX_STATE", data: {questionID: p.questionID, optionID: id}})}/> {option.option}
-            <div class="deleteIcon"><DeleteIcon onClick={() => p.update({type: "REMOVE_STUDENT", data: {questionID: p.questionID, optionID: id}})}></DeleteIcon></div>
+            <input type="checkbox" checked  onClick={() => p.update({type: "SAVE_CHECKBOX_STATE", data: {optionID: option.id}})}/> {option.option}
+            <div class="deleteIcon"><DeleteIcon onClick={() => p.update({type: "REMOVE", data: {optionID: option.id}})}></DeleteIcon></div>
           </div>
         </div> 
       </>
-        })}<AddIcon  onClick={() => p.update({type: "ADD_STUDENT", data: {questionID: p.questionID}})}></AddIcon ></div>
+        })}<AddIcon  onClick={() => p.update({type: "ADD_OPTION", data: {id: p.questionID}})}></AddIcon ></div>
    
 
   );

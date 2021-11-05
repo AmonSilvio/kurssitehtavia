@@ -1,8 +1,10 @@
 
 
-const giveNewID = (previous=0) => {
-    let min = previous * 2
-    let max = previous * 3 
+const giveNewID = () => {
+    //let min = previous * 2
+    //let max = previous * 3 
+    let min = 0
+    let max = 1000000
     let IDKey = "IDs"
     let IDlist = []
     let ID = 0    
