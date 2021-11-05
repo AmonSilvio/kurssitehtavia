@@ -45,7 +45,6 @@ function Tenttidemo() {
   });
 
   console.log("render")
-  console.log("main: "+ mainState)
   
   useEffect(() => {    
   let avain = "localStorageAvain"
@@ -54,13 +53,34 @@ function Tenttidemo() {
   },[mainState]); //makes the effect run if changed
 
 
-  const addQuestion = () => {
+  const update = (o)=> {
     let m = JSON.parse(JSON.stringify(mainState))
-    let previousID = findTheLastUsedID(m)
-    let newQID = giveNewID(previousID)
-    m[newQID]= {question: "Onko tämä uusi kysymys?", correctAnswer: 0, options: createOptions()}
-    console.log(m)
+
+    switch (o.type) {
+      case "REMOVE_STUDENT":
+        delete m[o.data.questionID].options[o.data.optionID]
+        break;
+      case "ADD_STUDENT":
+        let previousID = findTheLastUsedID(m[o.data.questionID].options)
+        let id = giveNewID(previousID)
+        m[o.data.questionID].options[id] = {option: giveRandomAnswerOption(), checkboxState: false}  
+        break;
+      case "REMOVE_QUESTION":
+        delete m[o.data.questionID]
+        break;
+      case "ADD_QUESTION":
+      //  previousID = findTheLastUsedID(m)
+        let newQID = giveNewID(6666)
+        m[newQID]= {question: "Onko tämä uusi kysymys?", correctAnswer: 0, options: createOptions()}
+        break;
+      case "SAVE_CHECKBOX_STATE":
+        m[o.data.questionID].options[o.data.optionID].checkboxState = !m[o.data.questionID].options[o.data.optionID].checkboxState
+        break;
+
+      default: throw "Error"
+    }
     setMainState(m)
+
   }
 
 
@@ -69,49 +89,15 @@ function Tenttidemo() {
     return l[l.length - 1]
   }
 
-  const copy = (src) => {
-    return JSON.parse(JSON.stringify(src))
-  }
- 
-
-const addOption = (questionID) => {
-  let m = copy(mainState)
-  let previousID = findTheLastUsedID(m[questionID].options)
-  let id = giveNewID(previousID)
-  m[questionID].options[id] = {option: giveRandomAnswerOption(), checkboxState: false}  
-  console.log(m[questionID].options) 
-  setMainState(m)
-}
-
-const removeOption = (questionID, id) => {
-  let m = copy(mainState)
-  delete m[questionID].options[id]
-  console.log(m[questionID].options)
-  console.log(m)
-  setMainState(m)
-}
-
-const checkBoxStateSave = (questionID, id) => {
-  let m = copy(mainState)
-  m[questionID].options[id].checkboxState = !m[questionID].options[id].checkboxState
-  setMainState(m)
-}
-
-const removeQuestion = (questionID) => { 
-  let m = JSON.parse(JSON.stringify(mainState))
-  delete m[questionID]
-  console.log(m)
-  setMainState(m)  
-}
 
 
   return (<body class="body1">   <br></br>
   <br></br>    
     <Container >   
         <> 
-        <Kysymykset setMainState={setMainState} addOption={addOption} removeQuestion={removeQuestion} checkBoxStateSave={checkBoxStateSave} removeOption={removeOption} giveNewID={giveNewID} mainState={mainState} findTheLastUsedID={findTheLastUsedID} />
+        <Kysymykset update={update} mainState={mainState}  />
         </>         
-             <button onClick={() => addQuestion()}>Lisää kysymys</button>
+             <button onClick={() => update({type: "ADD_QUESTION"})}>Lisää kysymys</button>
     </Container>
     </body>);
 }

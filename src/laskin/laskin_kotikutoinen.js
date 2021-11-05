@@ -1,7 +1,8 @@
 //import './App.css';
 
 import React, {useState} from "react";
-import Nappula from "../Nappula.js"
+import Nappula from "./Nappula.js"
+import Box from '@mui/material/Box';
 
 function Laskin_kotikutoinen() {
   const [kirjaimet, setKirjaimet] = useState(["%", "(", ")", "C", "7", "8", "9", "÷", "4", "5", "6", "×", "1", "2", "3", "-", "0", ".", "=", "+"])
@@ -131,13 +132,13 @@ function Laskin_kotikutoinen() {
 
 
 
-return (<div class="background">
+return (<body class="bodyLaskin"><Box class="background">
           <div class="resultBackground"><input STYLE="text-align: center;" class="screen" value={näyttö}></input>
           <input STYLE="text-align: center;" class="result" value={result}></input>
             </div>
           <div class="buttonBackground">{kirjaimet.map((kirjain, index) =><Nappula sisältö={kirjain} lisääMerkki={lisääMerkki}>  </Nappula>)}
           </div>
-        </div>)
+        </Box></body>)
 
 }
 

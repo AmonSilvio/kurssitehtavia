@@ -6,7 +6,7 @@ import AddIcon from '@mui/icons-material/Add';
 
 
 const Vastausvaihtoehdot = (p)  => {
- 
+
     return (
       <div>
         {Object.entries(p.options).map(([id, option]) => {
@@ -14,8 +14,8 @@ const Vastausvaihtoehdot = (p)  => {
           <> 
             <div class="answerlines">
               <div class="answerline">
-                <input type="checkbox" id={id} onClick={() => p.checkBoxStateSave(p.questionID, id)}/> {option.option}
-                <div class="deleteIcon"><DeleteIcon onClick={() => p.removeOption(p.questionID, id)}></DeleteIcon></div>
+                <input type="checkbox" id={id} onClick={() => p.update({type: "SAVE_CHECKBOX_STATE", data: {questionID: p.questionID, optionID: id}})}/> {option.option}
+                <div class="deleteIcon"><DeleteIcon onClick={() => p.update({type: "REMOVE_STUDENT", data: {questionID: p.questionID, optionID: id}})}></DeleteIcon></div>
               </div>
             </div> 
         </>) 
@@ -23,12 +23,12 @@ const Vastausvaihtoehdot = (p)  => {
         <> 
         <div class="answerlines">
           <div class="answerline">
-            <input type="checkbox" checked  onClick={() => p.checkBoxStateSave(p.questionID, id)}/> {option.option}
-            <div class="deleteIcon"><DeleteIcon onClick={() => p.removeOption(p.questionID, id)}></DeleteIcon></div>
+            <input type="checkbox" checked  onClick={() => p.update({type: "SAVE_CHECKBOX_STATE", data: {questionID: p.questionID, optionID: id}})}/> {option.option}
+            <div class="deleteIcon"><DeleteIcon onClick={() => p.update({type: "REMOVE_STUDENT", data: {questionID: p.questionID, optionID: id}})}></DeleteIcon></div>
           </div>
         </div> 
       </>
-        })}<AddIcon  onClick={() => p.addOption(p.questionID)}></AddIcon ></div>
+        })}<AddIcon  onClick={() => p.update({type: "ADD_STUDENT", data: {questionID: p.questionID}})}></AddIcon ></div>
    
 
   );

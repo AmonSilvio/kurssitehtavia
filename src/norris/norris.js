@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Timer from "./timer"
 
 const axios = require('axios');
-function App() {
+function Norris() {
 
   const [joke, setJoke] = useState([""])
   const [seconds, setSeconds] = useState(20)
@@ -79,16 +79,18 @@ function App() {
   }
 
   //<img src={image}></img> 
-  return (
-    <div class="box">
+  return (<body class="bodyNorris">
+    <div class="boxNorris">
 
         <div>{jokeScreen}</div>
         <br></br>
         <br></br>
-        <div class="timer"><Timer gimmeSeconds={gimmeSeconds}  createJokeScreen={createJokeScreen}></Timer> </div>        
-    </div>
+        <div class="timer"><Timer gimmeSeconds={gimmeSeconds}  createJokeScreen={createJokeScreen}></Timer> </div> 
+        <br></br>
+        <br></br>       
+    </div></body>
 
   );
 
 }
-export default App;
+export default Norris;

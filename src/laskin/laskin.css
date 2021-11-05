@@ -1,5 +1,5 @@
-body {
-    margin: 0;
+.bodyLaskin {
+  margin-top: -8%;  
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
       'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
       sans-serif;
@@ -7,31 +7,30 @@ body {
     -moz-osx-font-smoothing: grayscale;
   }
   
-  code {
-    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-      monospace;
-  }
+
   
   .background {
-    height: 500px;
-    width: 380px;
+    margin-top: 10%;
+    height: 50%;
+    width: 20%;
+  
     background-color: rgba(5, 44, 31, 0.644);
   }
   
-  div > div {
-    padding: 10px;
-  
-  }
+
   
   .buttonBackground {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     padding-left: 12px;
+    padding: 10px;
+    padding-bottom: 15px;
   
   }
   
   .resultBackground {
+    padding-top: 30px;
     display: flex;
     flex-direction: row;
   }
@@ -53,7 +52,7 @@ body {
   
   }
   
-  .button {
+  .buttonLaskin {
     display: inline-block;
     padding: 15px 25px;
     font-size: 24px;
@@ -69,9 +68,9 @@ body {
     min-width: 60px;
   }
   
-  .button:hover {background-color: #3e8e41}
+  .buttonLaskin:hover {background-color: #3e8e41}
   
-  .button:active {
+  .buttonLaskin:active {
     background-color:  rgba(49, 202, 151, 0.644);
     box-shadow: 0 5px #666;
     transform: translateY(4px);

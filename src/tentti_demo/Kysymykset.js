@@ -15,8 +15,8 @@ const Kysymykset = (p)  => {
       <div class="box shadow">       
             <Grid class="textbox"> 
              <div class="titleLine">
-              <h1>{question.question}</h1><DeleteIcon onClick={() => p.removeQuestion(id)}></DeleteIcon></div>
-              <Vastausvaihtoehdot questionID={id} options={question.options} checkBoxStateSave={p.checkBoxStateSave} removeOption={p.removeOption} addOption={p.addOption} setMainState={p.setMainState} mainState={p.mainState} findTheLastUsedID={p.findTheLastUsedID}/>                        
+              <h1>{question.question}</h1><DeleteIcon onClick={() => p.update({type: "REMOVE_QUESTION", data: {questionID: id}})}></DeleteIcon></div>
+              <Vastausvaihtoehdot update={p.update} questionID={id} options={question.options}/>                        
             </Grid>
                                      
        </div>

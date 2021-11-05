@@ -7,10 +7,11 @@ const giveNewID = (previous=0) => {
     let IDlist = []
     let ID = 0    
     let data = JSON.parse(localStorage.getItem(IDKey))
-     if (data !== null) {
+/*      if (data !== null) {
         IDlist = data    
         let IDFound = false
-        while (!IDFound) { 
+        let counter = 0
+        while (!IDFound || counter < 100) { 
             let sameIDFound = 0          
             ID = giveRandomNumber(min, max)
             for (let i of IDlist) {
@@ -20,11 +21,12 @@ const giveNewID = (previous=0) => {
             }
             if (sameIDFound === 0) {
                 IDFound = true
-            }          
+            }
+            counter++          
         }
-    } else { 
+    } else {  */
         ID = giveRandomNumber(min, max)
-   }    
+  // }    
     IDlist.push(ID)
     localStorage.setItem(IDKey, JSON.stringify(IDlist))
     return ID
