@@ -4,6 +4,7 @@ import Container from '@mui/material/Container';
 import Kysymykset  from './Kysymykset'
 import giveNewID from './newID';
 import giveRandomAnswerOption from './giveRandomAnswerOption';
+import dispatch from './toiminnot';
 
 
 const createOptions = () => {
@@ -12,7 +13,7 @@ const createOptions = () => {
     for (let i = 0; i < giveRandomNumber(3, 6); i++) {
       let o = giveRandomAnswerOption(optionList)
       optionList.push(o)
-      options.push({id: giveNewID(), option: o, checkboxState: false})
+      options.push({id: giveNewID(), txt: o, checkboxState: false, editMode: false})
     }
     options.map(op => console.log(op))
     return options
@@ -23,10 +24,10 @@ const giveRandomNumber = (min=0, max) => {
 }
 
 
-let questions = [{id: giveNewID(), question: "Onko JavaScript kivaa?", correctAnswer: 0, options: createOptions()},
-                {id: giveNewID(), question:  "Onko React kivaa?", correctAnswer: 0, options: createOptions()},
-                {id: giveNewID(), question: "Onko Reactin hookit vaikeita", correctAnswer: 0, options: createOptions()},
-                {id: giveNewID(), question: "Sirittääkö päässäsi?", correctAnswer: 0, options: createOptions()}]                  
+let questions = [{id: giveNewID(), txt: "Onko JavaScript kivaa?", editMode: false, correctAnswer: 0,  options: createOptions()},
+                {id: giveNewID(), txt:  "Onko React kivaa?", editMode: false, correctAnswer: 0, options: createOptions()},
+                {id: giveNewID(), txt: "Onko Reactin hookit vaikeita", editMode: false, correctAnswer: 0, options: createOptions()},
+                {id: giveNewID(), txt: "Sirittääkö päässäsi?", editMode: false, correctAnswer: 0,options: createOptions()}]                  
 
                   
 function Tenttidemo() {
@@ -50,59 +51,30 @@ function Tenttidemo() {
   localStorage.setItem(avain, JSON.stringify(mainState))
   console.log("useEffect")
   },[mainState]); //makes the effect run if changed
-
-
-  const remove= (list, id) => {    
-    list = list.filter(t => t.id !== id)
-    list.map(q => q.options = q.options.filter(t => t.id !== id))
-    return list
-  }
   
   const update = (o)=> {
-    let m = JSON.parse(JSON.stringify(mainState))
-
-    switch (o.type) {
-      case "REMOVE":    
-        m = remove(m, o.data.id)
-        break;
-      case "ADD_OPTION":
-        let newOption = {id: giveNewID(), option: giveRandomAnswerOption(), checkboxState: false}
-        m.find(q => q.id === o.data.id).options.push(newOption)
-        break;
-      case "ADD_QUESTION":
-        let newQ = {id: giveNewID(), question: "Onko tämä uusi kysymys?", correctAnswer: 0, options: createOptions()}
-        m.push(newQ)
-        break;
-      case "SAVE_CHECKBOX_STATE":
-        for (let question of m) {
-          for (let op of question.options) {
-            if (op.id === o.data.id) {
-              op.checkboxState = !op.checkboxState
-            }
-          }
-        }    
-        break;
-
-      default: throw "Error"
-    }
-    setMainState(m)
+    dispatch(o, mainState, setMainState)
   }
 
-
-  const findTheLastUsedID = (options) => {
-    let l = Object.keys(options)
-    return l[l.length - 1]
+  const clear = () => {
+    localStorage.clear()
   }
-
 
 
   return (<body class="body1">   <br></br>
   <br></br>    
-    <Container >   
-        <> 
-        <Kysymykset update={update} mainState={mainState}  />
-        </>         
-             <button onClick={() => update({type: "ADD_QUESTION"})}>Lisää kysymys</button>
+    <Container > 
+   
+        <>
+        {mainState.map(question => (<Kysymykset update={update} question={question} mainState={mainState}  />
+     ))} 
+        
+        </>   <br></br>
+        <button onClick={() => update({type: "ADD_QUESTION"})}>Lisää kysymys</button>
+             <button onClick={() => clear()}>Tyhjää muisti</button>  
+   
+             <br></br>
+             <br></br>
     </Container>
     </body>);
 }
