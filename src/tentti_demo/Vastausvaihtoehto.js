@@ -21,10 +21,10 @@ const Vastausvaihtoehto = (p)  => {
 
 
     return (<div class="tenttiOption">
-       {!editMode? <label onClick={() => editModeChange(!editMode)}>{p.option.txt}</label> :
+       {!editMode? <label class="text" onClick={() => editModeChange(!editMode)}>{p.option.txt}</label> :
                 <input class="tenttiInput" onBlur={() => editModeChange(false)} autoFocus={true} onKeyPress={handleKeyPress} type="text" onChange={(event) => p.update({type: "CHANGE", data:{id: p.option.id, txt: event.target.value}})}
                 value={p.option.txt}/>}
-                   <div class="deleteIcon"><EditIcon onClick={() => editModeChange(!editMode)}></EditIcon> <DeleteIcon onClick={() => p.update({type: "REMOVE", data: {id: p.option.id}})}></DeleteIcon></div>
+                   <div class="icons"><div class="glows"><EditIcon onClick={() => editModeChange(!editMode)}></EditIcon></div><div class="glows"> <DeleteIcon onClick={() => p.update({type: "REMOVE", data: {id: p.option.id}})}></DeleteIcon></div></div>
                 </div>   
   );
 }

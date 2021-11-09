@@ -36,8 +36,9 @@ const Kysymykset = (p)  => {
                {!editMode ? <label class="tenttih1" onClick={() => editModeChange()}>{p.question.txt}</label> :
                <input class="tenttiInput" onBlur={() => editModeChange()} autoFocus={true} onKeyPress={handleKeyPress} type="text" onChange={(event) => p.update({type:"CHANGE", data: {id: p.question.id, txt: event.target.value}})} value={p.question.txt} />}
                <div class="titleSymbols">
-               <EditIcon onClick={() => editModeChange()}></EditIcon>
-              <DeleteIcon onClick={() => p.update({type: "REMOVE", data: {id: p.question.id}})}></DeleteIcon></div>
+               <div class="glows"> <EditIcon onClick={() => editModeChange()}></EditIcon></div>
+               <div class="glows">
+              <DeleteIcon onClick={() => p.update({type: "REMOVE", data: {id: p.question.id}})}></DeleteIcon></div></div>
               </div>            
               <div>
         {p.question.options.map(option => {return (         
