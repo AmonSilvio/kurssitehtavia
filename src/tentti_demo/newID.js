@@ -19,7 +19,7 @@ const giveNewID = () => {
                     sameIDFound++
                 }
             }
-            if (sameIDFound === 0 || counter === 100) {
+            if (sameIDFound === 0 || counter > 100) {
                 IDFound = true
             }
             counter++          

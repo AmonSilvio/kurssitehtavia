@@ -160,6 +160,19 @@ body {
     margin-bottom: 3%;
   }
 
+  .examLine {
+    color: rgb(255, 247, 177);
+    margin-bottom: 3%;
+    font-size: 42px;
+
+  }
+
+  .nextExam {
+    display: flex;
+    justify-content:  right;
+    position:relative; top:-14px;
+  }
+
 
   button {
 	text-decoration: none;
@@ -221,4 +234,6 @@ body {
     padding-left: 10px;
 
   }
+
+
   

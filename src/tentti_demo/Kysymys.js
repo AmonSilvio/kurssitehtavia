@@ -10,7 +10,7 @@ import Checkbox from './checkbox';
 
 
 
-const Kysymykset = (p)  => {
+const Kysymys = (p)  => {
 
 
   const [editMode, setEditMode] = useState(p.question.editMode);
@@ -64,4 +64,4 @@ const Kysymykset = (p)  => {
 
 
 
-export default Kysymykset;
+export default Kysymys;

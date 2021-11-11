@@ -2,6 +2,7 @@ const giveRandomAnswerOption = (options=[]) => {
     let optionString = ["Kyllä", "Joo", "Ei", "Ehkä", "Mitä se sulle kuuluu?", "No jaa", "En kyllä osaa sanoa", "Jaa-a kuule", "No tuota niin niin...", "Kysy joltain muulta", "Että mitä?", "Nyt äijä kuule...", "Jätä mut rauhaan!", "Upeaa!!!"]
     let nameFound = false
     let w = optionString[0] 
+    let counter = 0
       while (nameFound === false) {
         let foundSameOption = 0
         let i = giveRandomNumber(0, optionString.length - 1)
@@ -11,9 +12,10 @@ const giveRandomAnswerOption = (options=[]) => {
             foundSameOption++
          }
         }
-        if (foundSameOption === 0) {
+        if (foundSameOption === 0 || counter > 100) {
           nameFound = true  
         }
+        counter++
       }      
     return w
   }

@@ -9,7 +9,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import Norris from "./norris/norris"
 import Laskin_kotikutoinen from "./laskin/laskin_kotikutoinen"
 
-import Tenttidemo from "./tentti_demo/Tenttidemo"
+import Tentti_sovellus from "./tentti_demo/Tentti_sovellus"
 import Listat from "./listahässäkkä/Listat"
 
 import React, {useState} from "react";
@@ -44,7 +44,7 @@ return ( <div><Box sx={{ flexGrow: 1 }}>
   </AppBar>
 </Box>
 
-{sovellus == 0 && <Tenttidemo></Tenttidemo>}     
+{sovellus == 0 && <Tentti_sovellus></Tentti_sovellus>}     
 {sovellus == 1 && <Listat></Listat>}
 {sovellus == 2 && <Norris></Norris>}
 {sovellus == 3 && <Laskin_kotikutoinen ></Laskin_kotikutoinen >}        
