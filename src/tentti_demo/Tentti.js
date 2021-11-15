@@ -5,6 +5,7 @@ import Grid from '@mui/material/Grid';
 import Container from '@mui/material/Container';
 import Kysymys  from './Kysymys'
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
+import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 
 
 const Tentti = (p)  => {
@@ -17,11 +18,13 @@ const Tentti = (p)  => {
                 <div> 
                     <Box class="container">
                         <div class="box shadow">       
-                            <Grid class="textbox"> 
-                                <div class="examLine">
+                            <Grid class="textbox">                           
+                                <div class="examLine">                                 
+                                    <ArrowBackIosNewIcon onClick = {() => p.update({type:"EXAM_BACKWARD"})} ></ArrowBackIosNewIcon>
+                               
                                     {p.exam.txt}
                                     <div class="nextExam" >
-                                        <ArrowForwardIosIcon onClick = {() => p.nextExam()} ></ArrowForwardIosIcon>
+                                        <ArrowForwardIosIcon onClick = {() => p.update({type:"EXAM_FORWARD"})} ></ArrowForwardIosIcon>
                                     </div> 
                                 </div>
                             </Grid> 
