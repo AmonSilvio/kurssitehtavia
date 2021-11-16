@@ -3,11 +3,8 @@ const axios = require('axios');
   const get = async (url) => {    
     let stuff = []
     try {
-      console.log(url)
       let response = await axios.get(url)
-      console.log("Vain response: ", response)
       stuff = response.data
-      console.log("Response data: ", url)
     }
     catch (error) {
       console.log(error)
@@ -17,7 +14,6 @@ const axios = require('axios');
 
     const remove = async (url) => {    
       try {
-        console.log(url)
         await axios.delete(url)
         return true
       }
@@ -25,8 +21,26 @@ const axios = require('axios');
         console.log(error)
         return false
       }
-      }
+    }
 
-    let axiosFunctions = {get, remove}
+    const save = async (url, stuff, definition) => {        
+      try {
+        await axios.put(url+definition, stuff)
+        return true
+      }
+      catch (error) {
+        console.log(error)
+        try {
+          await axios.post(url, stuff)
+          return true
+        }
+        catch (error) {
+          console.log(error)
+          return false
+        }
+      }
+    }
+
+    let axiosFunctions = {get, remove, save}
     
   export default axiosFunctions

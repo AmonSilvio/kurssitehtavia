@@ -4,6 +4,9 @@ import React, { useState, useEffect } from 'react';
 import Tentti from "./Tentti"
 import axiosFunctions from "./axiosFunctions"
 import Tenttigeneraattori from "./Tenttigeneraattori"
+import Box from '@mui/material/Box';
+import Grid from '@mui/material/Grid';
+import Container from '@mui/material/Container';
 
 import dispatch from './toiminnot';
 
@@ -15,8 +18,8 @@ import dispatch from './toiminnot';
 let exams = Tenttigeneraattori()
 console.log("Tässä näin:", exams) 
 let avain = "objekti"
-localStorage.setItem(avain, JSON.stringify(exams)) */
-                  
+localStorage.setItem(avain, JSON.stringify(exams))
+                   */
 function Tentti_sovellus() {
 
   const [dataFetched, setDataFetched] = useState(false)
@@ -35,43 +38,6 @@ function Tentti_sovellus() {
     localStorage.clear()
   }
 
-
-
-/*   const changeExam = (where) => {
-    let i = exams.indexOf(currentExam)  
-    if (where === "back") {      
-      if (i - 1 < 0) {
-        i = exams.length - 1
-      } else {
-        i--
-      }       
-    } else if (where === "forward") {
-      if (i + 1 >= exams.length) {
-        i = 0
-      } else {
-        i++
-      }      
-    }
-    setDataFetched(false) 
-    setCurrentExam(exams[i])
-  } */
-
-  const removeExam = async () => {
-/*     console.log("remove")
-    let key = "exam" + currentExam.id
-    localStorage.removeItem(key);
-    let dir = urlBase + "exams/" + currentExam.id
-    let deleteAttempt = await axiosFunctions.remove(dir)
-    if (deleteAttempt) {
-      console.log("Poisto tapahtui")
-      let i = exams.indexOf(currentExam)
-      let examsCopy = [].concat(exams)
-      examsCopy.splice(i, 1)    
-      setExams(examsCopy)
-      changeExam("forward") 
-    } */
-  }
-
   useEffect(() => {
     const fetchExams = async () => {
       let url = urlBase + "exams/"
@@ -84,38 +50,64 @@ function Tentti_sovellus() {
   }, [])
   
   useEffect(() => {
-    console.log("Kuinka monta")
     if (currentExam !== undefined) {
-      const fetchData = async () => {           
-      let url = urlBase + "questions?examId=" + currentExam.id
-      let questions = await axiosFunctions.get(url)
-      url = urlBase + "options?examId=" + currentExam.id
-      let options = await axiosFunctions.get(url)
-      for (let q of questions) {
-        q.options = options.filter(o => o.questionId === q.id)
-      }
-      let examObj = currentExam
-      examObj.questions = questions
+      const fetchData = async () => {
+        let examObj = {}
+        let avain = "exam" + currentExam.id
+        console.log("tää on avain: ", avain)
+        let data = JSON.parse(localStorage.getItem(avain))
+        if (data !== null) {
+          console.log("tää data saatiin: ", data)
+          examObj = data
+          console.log("data got from local storage")          
+        } else {               
+          let url = urlBase + "questions?examId=" + currentExam.id
+          let questions = await axiosFunctions.get(url)
+          url = urlBase + "options?examId=" + currentExam.id
+          let options = await axiosFunctions.get(url)
+          for (let q of questions) {
+            q.options = options.filter(o => o.questionId === q.id)
+          }
+          examObj = currentExam
+          examObj.questions = questions
+        }
       setDataFetched(true)     
       setCurrentExam(examObj)
       }
       if (!dataFetched) {
         fetchData()
      }
-    }
-          
+    }          
     }, [currentExam])
 
-/*     useEffect(() => {
-      let avain = "exam" + examNumber
-      localStorage.setItem(avain, JSON.stringify(currentExam))
-      },[currentExam]); */ //makes the effect run if changed */
+   /*  useEffect(() => {
+      console.log("tää on nyt: ", currentExam)
+      if (currentExam !== undefined) {
+        let avain = "exam" + currentExam.id
+        localStorage.setItem(avain, JSON.stringify(currentExam))
+      }
+      },[currentExam]);  *///makes the effect run if changed */
     
 
-  return (<body class="body1">  {dataFetched ? <div> <Tentti exam={currentExam}  update={update} ></Tentti> <button onClick={() => update({type: "REMOVE_EXAM"})}>Poista tentti</button>  <button onClick={() => update({type: "ADD_EXAM"})}>Lisää tentti</button> <button onClick={() => clear()}>Tyhjää local storage</button>
+  return (<body class="body1">
+
+<Container>
+                <div> 
+                    <Box class="container">
+                        <div class="box shadow">       
+                            <Grid class="textbox">                           
+                            <button onClick={() => update({type: "REMOVE_EXAM"})}>Poista tentti</button>  <button onClick={() => update({type: "ADD_EXAM"})}>Lisää tentti</button> <button onClick={() => clear()}>Tyhjää local storage</button>
+                            </Grid> 
+                        </div>
+                    </Box>
+                </div>
+            </Container>
+              {dataFetched ? <div> 
+                <Tentti exam={currentExam}  update={update} ></Tentti> 
+             
    
   <br></br>
-  <br></br> </div> : <div>Haetaan dataa</div>}
+  <br></br> </div> : <div></div>}
     </body>);
 }
 

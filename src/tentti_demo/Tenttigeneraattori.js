@@ -46,7 +46,7 @@ const Tenttigeneraattori = () => {
   for (let i = 0; i < howManyExams; i++) {
     title = "Tentti Nº" + (i + 1)
     let examId = (giveNewID())
-    let exam = {id: examId, txt: title}
+    let exam = {id: examId, txt: title, editMode: false}
     let questionNOptions = createQuestions(examId)
     questions = questions.concat(questionNOptions.questions)
     options = options.concat(questionNOptions.options)

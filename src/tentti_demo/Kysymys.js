@@ -1,5 +1,5 @@
 import './App.css';
-import React, { useState, useEffect } from 'react';
+import React, { useState} from 'react';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -15,14 +15,22 @@ const Kysymys = (p)  => {
 
   const [editMode, setEditMode] = useState(p.question.editMode);
 
+  const save = () => {
+    p.update({type: "SAVE", data:{obj: p.question, id: p.question.id, definition: "questions"}} )
+  }
+
   const handleKeyPress = (event) => {
       if(event.key === 'Enter'){
+          save()
           setEditMode(false)
       }
     }
 
     const editModeChange = () => {
       p.update({type: "CHANGE", data:{id: p.question.id, txt: p.question.txt, editMode: !editMode}})
+      if (editMode === true) {
+        save()
+      }
       setEditMode(!editMode)
   }   
   
@@ -38,7 +46,7 @@ const Kysymys = (p)  => {
                <div class="titleSymbols">
                <div class="glows"> <EditIcon onClick={() => editModeChange()}></EditIcon></div>
                <div class="glows">
-              <DeleteIcon onClick={() => p.update({type: "REMOVE", data: {id: p.question.id}})}></DeleteIcon></div></div>
+              <DeleteIcon onClick={() => p.update({type: "REMOVE_QUESTION", data: {id: p.question.id}})}></DeleteIcon></div></div>
               </div>            
               <div>
         {p.question.options.map(option => {return (         
