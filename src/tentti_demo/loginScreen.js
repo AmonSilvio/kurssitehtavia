@@ -15,33 +15,57 @@ const LoginScreen = (p)  => {
 
     const [userName, setUserName] = useState("")
     const [pswd, setPswd] = useState("")
-    const data = JSON.stringify({
-            kayttajanimi: "Reiska", salasana: "napakymppiHerraB"
-          })
 
 
-    const options = {
+    let options = {
         hostname: 'localhost',
         port: 3443,
         path: '/register',
         method: 'POST',
         headers: {
-            'Content-Type': 'application/json',
-            'Content-Length': data.length }
+            'Content-Type': 'application/json'/* ,
+            'Content-Length': data.length */ }
       };
     
-      const req = https.request(options, res => {
-        console.log(`statusCode: ${res.statusCode}`)
-      })
       
-      req.on('error', error => {
-        console.error(error)
-    })
+
+    const createData = () => {
+        return JSON.stringify({
+            kayttajanimi: userName, salasana: pswd
+          })
+    }
 
 
-    const register = async () => {               
-        await req.write(data)
-        req.end()    
+    const register = async () => {        
+        await request('/register')
+    }
+
+    const request = async (path) => {
+        options.path = path
+        let req = await https.request(options, res => {
+            console.log(options.path)
+            console.log(`statusCode: ${res.statusCode}`)        
+    
+          res.on('data', (d) => {
+            if (options.path === '/login') {
+                let avain = "token"
+                localStorage.setItem(avain, d.toString())
+            }
+            return d
+          });
+        });
+        req.on('error', error => {
+            console.error(error)
+        })
+
+        let d = req.write(createData())       
+        req.end()
+        return d
+  
+    }
+
+    const login = async () => {
+        await request('/login')
     }
 
     const handleSubmit = event => {        
@@ -57,8 +81,8 @@ const LoginScreen = (p)  => {
             <div class="signup">
 				 <form onSubmit={handleSubmit}>
 					<label for="chk" aria-hidden="true">Sign up</label>
-					<input type="text" name="txt" onChange={(event) => setUserName( event.target.value)} placeholder="User name" required=""/>
-					<input type="password" name="pswd"  onChange={(event) => setPswd( event.target.value)} placeholder="Password" required=""/>
+					<input type="text" name="txt" value={userName} onChange={(event) => setUserName( event.target.value)} placeholder="User name" required=""/>
+					<input type="password" name="pswd"  value={pswd} onChange={(event) => setPswd( event.target.value)} placeholder="Password" required=""/>
 					<button onClick={()=> register()}>Sign up</button>
 				 </form>
 			</div>
@@ -66,9 +90,9 @@ const LoginScreen = (p)  => {
             <div class="mainLogin">
                 <form onSubmit={handleSubmit}>
 					<label for="chk" aria-hidden="true">Login</label>
-                    <input type="text" name="txt" placeholder="User name" required=""/>
-					<input type="password" name="pswd" placeholder="Password" required=""/>
-					<button onClick={()=> register()}>Login</button>
+                    <input type="text" name="txt" value={userName} onChange={(event) => setUserName( event.target.value)} placeholder="User name" required=""/>
+					<input type="password" name="pswd" value={pswd} onChange={(event) => setPswd( event.target.value)} placeholder="Password" required=""/>
+					<button onClick={()=> login()}>Login</button>
                         
                     </form>
 			</div>                        
