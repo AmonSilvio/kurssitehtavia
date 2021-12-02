@@ -13,7 +13,7 @@ const Checkbox = (p)  => {
     }
 
     return (<div class="tenttiOption" > {!checked ? 
-        <input type="checkbox" onClick={() => checkNUncheck()}/> : <input type="checkbox" checked onClick={() => checkNUncheck()}/>
+        <input type="checkbox" onClick={() => checkNUncheck()}/> : <input  data-testid="checkbox2" type="checkbox" checked onClick={() => checkNUncheck()}/>
       }
   </div>);
 }

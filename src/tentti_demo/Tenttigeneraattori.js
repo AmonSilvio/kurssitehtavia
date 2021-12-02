@@ -6,7 +6,7 @@ let minAmountOfOptionsPerQuestion = 4
 let maxAmountOfOptionsPerQuestion = 4
 let minAmountOfQuestionsPerExam = 20
 let maxAmountOfQuestionsPerExam = 20
-let howManyExams = 20
+let howManyExams = 1
 
 
 const createOptions = (questionId, examId) => {

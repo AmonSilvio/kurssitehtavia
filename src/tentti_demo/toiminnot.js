@@ -162,7 +162,6 @@ const dispatch = async (o, currentExam, setCurrentExam, exams, setExams, urlBase
       default: throw "Error"
     }
     console.log("exam: ", m)
-    //updateExams(setExams, exams, m)
     setCurrentExam(m)
   }
 

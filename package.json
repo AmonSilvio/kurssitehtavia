@@ -2,13 +2,13 @@
   "name": "reactappis",
   "version": "0.1.0",
   "private": true,
-  "type": "module",
   "dependencies": {
+    "@babel/core": "^7.16.0",
+    "@babel/preset-env": "^7.16.4",
     "@emotion/react": "^11.5.0",
     "@emotion/styled": "^11.3.0",
     "@mui/icons-material": "^5.0.4",
     "@mui/material": "^5.0.4",
-    "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^11.2.7",
     "@testing-library/user-event": "^12.8.3",
     "axios": "^0.23.0",
@@ -18,7 +18,10 @@
     "react-dom": "^17.0.2",
     "react-scripts": "4.0.3",
     "react-virtualized": "^9.22.3",
-    "web-vitals": "^1.1.2"
+    "test": "^0.6.0",
+    "uuid": "^8.3.2",
+    "web-vitals": "^1.1.2",
+    "yarn": "^1.22.17"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -28,8 +31,7 @@
   },
   "eslintConfig": {
     "extends": [
-      "react-app",
-      "react-app/jest"
+      "react-app"
     ]
   },
   "browserslist": {

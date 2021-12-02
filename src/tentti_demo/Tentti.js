@@ -36,7 +36,7 @@ const Tentti = (p)  => {
 
   
 
-  return (<div> 
+  return (<div data-testid="tentti"> 
             <br></br>
             <Container>
                 <div> 
@@ -58,10 +58,10 @@ const Tentti = (p)  => {
             </Container>
             <br></br>    
             <Container>    
-                <>{p.exam.questions.map((question, id) => (
+                {p.exam.questions.map((question, id) => (
                     <Kysymys update={p.update} question={question} questionID={id} mainState={p.mainState} />
                 ))}         
-                </>   
+              
                 <br></br>
                 <button onClick={() => p.update({type: "ADD_QUESTION"})}>Lisää kysymys</button>             
             </Container>

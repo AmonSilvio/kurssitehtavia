@@ -35,7 +35,7 @@ const Kysymys = (p)  => {
   }   
   
 
-  return (<div>
+  return (<div  id="kysymys" data-testid="kysymys2">
     
     <Box class="container">
       <div class="box shadow">       
@@ -50,14 +50,14 @@ const Kysymys = (p)  => {
               </div>            
               <div>
         {p.question.options.map(option => {return (         
-          <> 
+           
             <div class="answerlines">
               <div class="answerline"> 
               <Checkbox id={option.id} checkboxState={option.checkboxState} update={p.update} />
               <Vastausvaihtoehto update={p.update} option={option}/>        
               </div>
             </div> 
-        </> )
+         )
         
         })}<AddIcon  onClick={() => p.update({type: "ADD_OPTION", data: {id: p.question.id}})}></AddIcon ></div>
    

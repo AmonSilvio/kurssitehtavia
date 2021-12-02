@@ -25,10 +25,10 @@ const Vastausvaihtoehto = (p)  => {
           save()
         }
         setEditMode(!editMode)
-    }   
+    }
+    
 
-
-    return (<div class="tenttiOption">
+    return (<div data-testid="option" class="tenttiOption">
        {!editMode? <label class="text" onClick={() => editModeChange(!editMode)}>{p.option.txt}</label> :
                 <input class="tenttiInput" onBlur={() => editModeChange(false)} autoFocus={true} onKeyPress={handleKeyPress} type="text" onChange={(event) => p.update({type: "CHANGE", data:{id: p.option.id, txt: event.target.value}})}
                 value={p.option.txt}/>}
